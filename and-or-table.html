@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-direction: column;
+            padding: 100px;
+            text-align: center;
+            letter-spacing: -1.5px;
+        }
+
+        table{
+            border-collapse: collapse;
+            border: 1px solid black;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        tr, td{
+            border: 1px solid black;
+        }
+
+        td {
+            padding: 8px 16px;
+        }
+
+        tr:nth-of-type(even){
+            background-color: aqua;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="and_container">
+    </div>
+    <div class="or_container">
+    </div>
+</div>
+
+<body>
+
+    <script>
+        const andTemplate = `
+        <h1>&& and</h1>
+        <table>
+            <thead>
+                <td>좌변</td>
+                <td>우변</td>
+                <td>결과</td>
+            </thead>
+            <tr>
+                <td>false</td>
+                <td>false</td>
+                <td>${false && false}</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>true</td>
+                <td>${false && true}</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>false</td>
+                <td>${true && false}</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>true</td>
+                <td>${true && true}</td>
+            </tr>
+        </table>
+        `
+
+        const orTemplate = `
+        <h1>|| or</h1>
+        <table>
+            <thead>
+                <td>좌변</td>
+                <td>우변</td>
+                <td>결과</td>
+            </thead>
+            <tr>
+                <td>false</td>
+                <td>false</td>
+                <td>${false || false}</td>
+            </tr>
+            <tr>
+                <td>false</td>
+                <td>true</td>
+                <td>${false || true}</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>false</td>
+                <td>${true || false}</td>
+            </tr>
+            <tr>
+                <td>true</td>
+                <td>true</td>
+                <td>${true || true}</td>
+            </tr>
+        </table>
+        `
+
+        document.querySelector(".and_container").insertAdjacentHTML("beforeend", andTemplate);
+        document.querySelector(".or_container").insertAdjacentHTML("beforeend", orTemplate);
+
+
+    </script>
+</body>
+
+</html>

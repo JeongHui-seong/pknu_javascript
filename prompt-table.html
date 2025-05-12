@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const pt = prompt("가격 입력");
+        console.log(pt)
+
+        const template = `    <table style = "font-size: 30px;">
+        <tr>
+            <td style = "background-color: #ddd; padding: 10px;">원가</td>
+            <td style = "background-color: #eee; color:red; padding: 10px;">${pt}원</td>
+        </tr>
+        <tr>
+            <td style = "background-color: #ddd; padding: 10px;">10% 할인된 값</td>
+            <td style = "background-color: #eee; color:red; padding: 10px;">${pt * 0.9}원</td>
+        </tr>
+                <tr>
+            <td style = "background-color: #ddd; padding: 10px;">20% 할인된 값</td>
+            <td style = "background-color: #eee; color:red; padding: 10px;">${pt * 0.8}원</td>
+        </tr>
+                <tr>
+            <td style = "background-color: #ddd; padding: 10px;">30% 할인된 값</td>
+            <td style = "background-color: #eee; color:red; padding: 10px;">${pt * 0.7}원</td>
+        </tr>
+    </table>`
+        document.write(template)
+    </script>
+</body>
+
+</html>
