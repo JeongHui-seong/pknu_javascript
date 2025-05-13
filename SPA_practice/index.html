@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        class Component {
+            dictItems;
+            $target;
+            constructor($target) {
+                this.$target = $target;
+                this.setUp();
+                this.render();
+            }
+
+            setUp() { }
+            render() {
+                this.$target.innerHTML = this.template();
+                this.setEvent();
+            }
+            template() { return ''; }
+            setEvent() { }
+            setItems(newItem) {
+                this.dictItems = { ...this.dictItems, ...newItem };
+                this.render();
+            }
+        }
+
+        class App extends Component {
+            setUp() {
+                this.dictItems = { listItems: ["item1", "item2"] };
+            }
+            template() {
+                const { listItems } = this.dictItems;
+                return `
+                <ul>
+                    ${listItems.map((item, key) => `<li>${item}<button data-index = ${key} class = "btn_delete_item">삭제</button></li>`).join('')}
+                </ul>
+                <input class = "ipt_text" type="text">
+                <button class = "btn_add_item">추가하기</button>
+                `
+            }
+            setEvent() {
+                this.$target.querySelector(".btn_add_item").addEventListener("click", () => {
+                    const $iptText = this.$target.querySelector(".ipt_text");
+                    const { listItems } = this.dictItems;
+                    this.setItems({ listItems: [...listItems, $iptText.value] });
+                });
+
+                this.$target.querySelectorAll(".btn_delete_item").forEach(deletebtn =>
+                    deletebtn.addEventListener("click", (e) => {
+                        const { listItems } = this.dictItems;
+                        listItems.splice(e.currentTarget.getAttribute("data-index"), 1);
+                        this.setItems({ listItems: [...listItems] });
+                    })
+                );
+            }
+        }
+
+        new App(document.getElementById("app"));
+    </script>
+</body>
+
+</html>
