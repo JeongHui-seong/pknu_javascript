@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding-top: 40px;
+    }
+    h1{
+        margin-bottom: 40px;
+    }
+    table{
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+    td{
+        border: 1px solid black;
+        padding: 10px;
+    }
+</style>
+<body>
+    <h1>자리배치도</h1>
+    <table>
+    </table>
+
+    <script>
+        const table = document.querySelector("table");
+        let columns = prompt("한줄에 몇 명 앉을래?");
+        const total = prompt("총인원 몇명?");
+        let count = total;
+        let row = Math.ceil(total / columns);
+        let template = ``
+        for (let i = 1; i <= row; i++) {
+                template += "<tr>"
+                for (let j = 1; j <= columns; j++){
+                    if (count){
+                        template += `<td>좌석${total - count + 1}</td>`
+                        count--;
+                    }
+                }
+                template += "</tr>"
+            }
+
+        table.innerHTML = template;
+        
+    </script>
+</body>
+</html>
