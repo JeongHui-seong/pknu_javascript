@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let p = '';
+        for (let i = 1; i < 10; i++) {
+            for (let j = 10; j > i; j--){
+                p += ' '
+            }
+            for (let k = 0; k < 2 * i - 1; k++){
+                p += '*'
+            }
+            p += '\n'
+        }
+        console.log(p)
+    </script>
+</body>
+</html>
