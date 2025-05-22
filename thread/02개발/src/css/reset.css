@@ -7,6 +7,7 @@
     --gray1: #f1f3f6;
     --gray2: #e9ebef;
     --gray3: #b1b7c3;
+    --wrong: #E35C5E;
     --point: #b0db9c;
     --title-font-size : 32px;
     --normal-font-size : 16px;
@@ -27,6 +28,9 @@ li{
 a{
     text-decoration: none;
     color: inherit;
+}
+input:focus{
+    outline: none;
 }
 #app{
     width: 100%;
@@ -64,6 +68,12 @@ a{
     justify-content: center;
     gap: 8px;
     height: 100%;
+}
+.user_log li{
+    display: none;
+}
+.log_active{
+    display: block !important;
 }
 #main{
     width: 100%;
