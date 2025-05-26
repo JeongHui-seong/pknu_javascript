@@ -30,8 +30,12 @@ export default class Login {
     }
 
     async loadUser(id, pw) {
+        if (this.isLoading) return;
+        this.isLoading = true;
+
         try{
             this.userInfo = await this.db.fetchUser(id, pw);
+            // console.log(this.userInfo, id, pw);
             // console.log(this.userInfo);
             if (this.userInfo.length == 0) {
                 alert("해당하는 아이디가 없습니다.");
@@ -44,6 +48,8 @@ export default class Login {
         catch(error){
             console.log(error)
         }
+
+        this.isLoading = false;
     }
 
     loginCheckLabel(element) {
@@ -68,6 +74,34 @@ export default class Login {
         }
     };
 
+    handleLogin = () => {
+        const $loginInpID = document.getElementById("id");
+        const $loginInpPW = document.getElementById("password");
+        const $btnLogin = document.getElementById("btn_login");
+
+        if ($btnLogin.classList.contains("active")){
+            this.loadUser($loginInpID.value, $loginInpPW.value);
+        }
+    }
+
+    handleEnterKey = (e) => {
+        const $btnLogin = document.getElementById("btn_login");
+
+        if (e.code == "Enter" && $btnLogin.classList.contains("active")){
+            e.preventDefault();
+            $btnLogin.click();
+        }
+    }
+
+    handleNumEnterKey = (e) => {
+        const $btnLogin = document.getElementById("btn_login");
+
+        if (e.code == "NumpadEnter" && $btnLogin.classList.contains("active")){
+            e.preventDefault();
+            $btnLogin.click();
+        }
+    }
+
     setEventListener() {
         const $loginInpID = document.getElementById("id");
         const $loginInpPW = document.getElementById("password");
@@ -78,11 +112,12 @@ export default class Login {
         $loginInpID.addEventListener("input", this.checkLoginBtn);
         $loginInpPW.addEventListener("input", this.checkLoginBtn);
 
-        $btnLogin.addEventListener("click", () => {
-            if ($loginInpID.value.trim() !== "" && $loginInpPW.value.trim() !== "") {
-                this.loadUser($loginInpID.value, $loginInpPW.value);
-            }
-        });
+        $btnLogin.removeEventListener("click", this.handleLogin);
+        document.removeEventListener("keydown", this.handleEnterKey);
+        document.removeEventListener("keydown", this.handleNumEnterKey);
+        $btnLogin.addEventListener("click", this.handleLogin);
+        document.addEventListener("keydown", this.handleEnterKey);
+        document.addEventListener("keydown", this.handleNumEnterKey);
     }
 
     render(target) {

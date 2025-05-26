@@ -32,6 +32,25 @@ export default class DB {
         }
     }
 
+    async fetchPosts(){
+        try{
+            const { data } = await this.supabase
+            .from("posts")
+            .select(`post_content,
+                post_created,
+                post_updated,
+                users(
+                    user_name
+                )`
+            )
+            .order("post_created", {ascending: false})
+            return data;
+        }
+        catch (err){
+            console.log(err);
+        }
+    }
+
     async DBIDCheck(id) {
         this.userInfo = await this.fetchUser(id);
         if (this.userInfo.length == 0) {

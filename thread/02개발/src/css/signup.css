@@ -37,8 +37,6 @@
     background-color: transparent;
     border: 1px solid var(--gray2);
     color: var(--gray3);
-    font-weight: bold;
-    font-family: 'NanumGothic';
     pointer-events: none;
 }
 .inp_wrong{

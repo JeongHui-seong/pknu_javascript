@@ -60,7 +60,7 @@ class Router {
 
     setEventListener(){
         const $goLogout = document.querySelector(".go_logout");
-        $goLogout.addEventListener("click", this.logoutUser);
+        $goLogout.addEventListener("click", this.logoutUser.bind(this));
     }
 
     logoutUser() {
@@ -91,7 +91,13 @@ class Router {
             resetCSS.href = `./src/css/reset.css`;
             document.head.appendChild(resetCSS);
         }
-        if (!h) return;
+        if (!h) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = `./src/css/home.css`;
+            document.head.appendChild(link);
+            return;
+        };
         if (!document.querySelector(`link[href="./src/css/${h}.css"]`)) {
             const link = document.createElement("link");
             link.rel = "stylesheet";
@@ -101,18 +107,21 @@ class Router {
     }
 
     removeCSS() {
-        const existingCSS = document.querySelectorAll("link[href^='./src/css/']");
+        const existingCSS = document.querySelectorAll("link");
         existingCSS.forEach(css => {
             if (css.href.includes("reset.css")) return;
-            css.parentNode.removeChild(css);
+            if (css.href.includes("/src/css")){
+                css.parentNode.removeChild(css);
+            }
         });
     }
 
     render() {
         let currentHash = window.location.hash || "#/";
         if (!localStorage.getItem("username") && currentHash !== "#/signup") {
-            currentHash = "#/login"
+            currentHash = "#/login";
         }
+        this.target.innerHTML = '<img src="./src/img/svg/loadingicon.svg" alt="loadingicon">';
         const found = this.routes.find(route => route.fragment == currentHash);
         if (found) {
             found.component();

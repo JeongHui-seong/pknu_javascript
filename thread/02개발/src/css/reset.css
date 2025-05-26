@@ -7,11 +7,12 @@
     --gray1: #f1f3f6;
     --gray2: #e9ebef;
     --gray3: #b1b7c3;
+    --gray4: #9196A1;
     --wrong: #E35C5E;
     --point: #b0db9c;
     --title-font-size : 32px;
     --normal-font-size : 16px;
-    --border-radius : 16px
+    --border-radius : 16px;
 }
 
 body {
@@ -31,6 +32,13 @@ a{
 }
 input:focus{
     outline: none;
+}
+button{
+    border: none;
+    background: none;
+    font-family: "NanumGothic";
+    font-size: var(--normal-font-size);
+    cursor: pointer;
 }
 #app{
     width: 100%;
